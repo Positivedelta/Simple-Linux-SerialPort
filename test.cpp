@@ -19,13 +19,15 @@ int32_t main()
         //
         auto serialPort = SerialPort("/dev/serial0", 115200, true, [](const uint8_t bytes[], const int32_t length) {
             const auto asText = std::string(reinterpret_cast<const char*>(bytes), length);
-            std::cout << asText;
+            std::cout << asText << std::flush;
         });
 
         // say hello and then sleep for 10 seconds to allow some data to be RXed...
         //
         serialPort.printLine("Hello World!");
         serialPort.print("Please type some text: ");
+        serialPort.printLine();
+
         std::this_thread::sleep_for(std::chrono::seconds(10));
     }
     catch (const std::string& message)
