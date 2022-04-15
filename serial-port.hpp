@@ -29,7 +29,8 @@ class SerialPort
 
     public:
         SerialPort(const std::string& deviceName, const int32_t baudRate, const bool enableReceiver = false, const ReadListener rxListener = DEFAULT_RX_LISTENER);
-        void write(const uint8_t[], int32_t length) const;
+        void write(const uint8_t bytes[], int32_t length) const;
+        void write(const uint8_t singleByte) const;
         void print(const std::string& text) const;
         void printLine() const;
         void printLine(const std::string& text) const;

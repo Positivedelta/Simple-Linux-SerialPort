@@ -125,6 +125,12 @@ void SerialPort::write(const uint8_t bytes[], int32_t length) const
     }
 }
 
+void SerialPort::write(const uint8_t singleByte) const
+{
+    const uint8_t bytes[1] = {singleByte};
+    write(bytes, 1);
+}
+
 void SerialPort::print(const std::string& text) const
 {
     write(reinterpret_cast<const uint8_t*>(text.data()), text.size());
