@@ -26,9 +26,9 @@ int32_t main()
         //
         serialPort.printLine("Hello World!");
         serialPort.print("Please type some text: ");
-        serialPort.printLine();
 
         std::this_thread::sleep_for(std::chrono::seconds(10));
+        serialPort.printLine();
     }
     catch (const std::string& message)
     {
