@@ -32,7 +32,7 @@ int32_t main()
     }
     catch (const std::string& message)
     {
-        std::cout << "Exception, " + message;
+        std::cout << "Exception, " + message << std::endl;
     }
 
     return 0;

@@ -62,7 +62,7 @@ SerialPort::SerialPort(const std::string& deviceName, const int32_t baudRate, co
         }
 
         deviceFd = open(deviceName.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
-        if (!deviceFd) throw std::string("Unable to open the serial port on device: ") + deviceName;
+        if (deviceFd == -1) throw std::string("Unable to open the serial port on device: ") + deviceName;
 
         // set the tx/rx baud rate
         //
