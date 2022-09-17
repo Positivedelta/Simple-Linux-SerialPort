@@ -81,17 +81,17 @@ SerialPort::SerialPort(const std::string& deviceName, const int32_t baudRate, co
         if (enableReceiver)
         {
             rxTask = std::thread([this, rxListener]() {
-                struct timeval timeout;
-                timeout.tv_sec = 0;
-                timeout.tv_usec = RX_SELECT_TIMEOUT_US;
-
                 fd_set readFdSet;
+                struct timeval timeout;
                 uint8_t rxBuffer[RX_BUFFER_SIZE];
                 const int32_t maxFd = 1 + deviceFd;
                 while (doReceive)
                 {
                     FD_ZERO(&readFdSet);
                     FD_SET(deviceFd, &readFdSet);
+
+                    timeout.tv_sec = 0;
+                    timeout.tv_usec = RX_SELECT_TIMEOUT_US;
 
                     auto fdCount = select(maxFd, &readFdSet, nullptr, nullptr, &timeout);
                     if (fdCount > 0 && FD_ISSET(deviceFd, &readFdSet))
