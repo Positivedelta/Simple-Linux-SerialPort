@@ -25,6 +25,7 @@ make install
 
 The following default paths are used, edit `CMakeLists.txt` if you want to update these
 - The shared library is installed to `bit-parallel/lib`
+- The common include files are installed to `bit-parallel/include/communications`
 - The include files are installed to `bit-parallel/include/communications/serial`
 - The test appliactions are installed to `bit-parallel/bin/serial`
 
