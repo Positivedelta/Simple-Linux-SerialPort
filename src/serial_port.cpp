@@ -1,14 +1,14 @@
 //
-// (c) Bit Parallel Ltd (Max van Daalen), March 2022
+// (c) Bit Parallel Ltd, August 2023
 //
 
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
 
-#include "serial-port.hpp"
+#include "serial_port.hpp"
 
-SerialPort::SerialPort(const std::string& deviceName, const int32_t baudRate, const bool enableReceiver, const ReadListener rxListener):
+bpl::SerialPort::SerialPort(const std::string& deviceName, const int32_t baudRate, const bool enableReceiver, const ReadListener rxListener):
     deviceName(deviceName), enableReceiver(enableReceiver) {
 
         // these baud rates are limited to the predefined magic numbers set by the Open Group!
@@ -107,7 +107,7 @@ SerialPort::SerialPort(const std::string& deviceName, const int32_t baudRate, co
         }
 }
 
-void SerialPort::write(const uint8_t bytes[], int32_t length) const
+void bpl::SerialPort::write(const uint8_t bytes[], int32_t length) const
 {
     int32_t i = 0;
     int32_t writeStatus; 
@@ -125,29 +125,29 @@ void SerialPort::write(const uint8_t bytes[], int32_t length) const
     }
 }
 
-void SerialPort::write(const uint8_t singleByte) const
+void bpl::SerialPort::write(const uint8_t singleByte) const
 {
     const uint8_t bytes[1] = {singleByte};
     write(bytes, 1);
 }
 
-void SerialPort::print(const std::string& text) const
+void bpl::SerialPort::print(const std::string& text) const
 {
     write(reinterpret_cast<const uint8_t*>(text.data()), text.size());
 }
 
-void SerialPort::printLine() const
+void bpl::SerialPort::printLine() const
 {
     write(NEW_LINE, sizeof(NEW_LINE));
 }
 
-void SerialPort::printLine(const std::string& text) const
+void bpl::SerialPort::printLine(const std::string& text) const
 {
     print(text);
     write(NEW_LINE, sizeof(NEW_LINE));
 }
 
-SerialPort::~SerialPort()
+bpl::SerialPort::~SerialPort()
 {
     if (enableReceiver)
     {

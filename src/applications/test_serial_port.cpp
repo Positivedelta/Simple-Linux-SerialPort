@@ -1,5 +1,5 @@
 //
-// (c) Bit Parallel Ltd (Max van Daalen), March 2022
+// (c) Bit Parallel Ltd, August 2023
 //
 
 #include <chrono>
@@ -8,7 +8,7 @@
 #include <string>
 #include <thread>
 
-#include "serial-port.hpp"
+#include "serial_port.hpp"
 
 int32_t main()
 {
@@ -17,7 +17,7 @@ int32_t main()
         // create and open the serial port, enable the receiver thread add a listener for any RXed data
         // note, the destructor will close the selected device
         //
-        auto serialPort = SerialPort("/dev/serial0", 115200, true, [](const uint8_t bytes[], const int32_t length) {
+        auto serialPort = bpl::SerialPort("/dev/serial0", 115200, true, [](const uint8_t bytes[], const int32_t length) {
             const auto asText = std::string(reinterpret_cast<const char*>(bytes), length);
             std::cout << asText << std::flush;
         });
